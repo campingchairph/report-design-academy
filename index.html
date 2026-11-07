@@ -1,0 +1,678 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Report Design Academy</title>
+<meta name="description" content="A 6-week course in building annual reports with Workiva, InDesign, Illustrator, Word and Photoshop. Short reads, quizzes and hands-on tasks.">
+<meta name="theme-color" content="#090D12">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='5' cy='5' r='4' fill='%2322B8F0'/%3E%3Ccircle cx='15' cy='5' r='4' fill='%23F0479A'/%3E%3Ccircle cx='5' cy='15' r='4' fill='%23F5C84A'/%3E%3Ccircle cx='15' cy='15' r='4' fill='%23B6C0CA'/%3E%3C/svg%3E">
+<style>html,body{margin:0;padding:0}img{max-width:100%}[hidden]{display:none!important}body{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: mobile-first app shell. Glass app bar, slide-in lesson drawer (sidebar on desktop),
+   sticky Read/Quiz/Hands-on switcher, animated CMYK ink-wave hero. Dark-first, light mirror. */
+:root{
+  --bg:#090D12; --surface:#10161E; --surface-2:#18212C; --line:#233041; --fg:#E9EFF6; --muted:#8E9DAE;
+  --accent:#3CC8F5; --accent-ink:#03121A; --accent-soft:rgba(60,200,245,.13);
+  --good:#4ADB98; --good-soft:rgba(74,219,152,.12); --bad:#FF7E6E; --bad-soft:rgba(255,126,110,.12);
+  --c:#22B8F0; --m:#F0479A; --y:#F5C84A; --k:#B6C0CA; --s1:#9C8CFF; --s2:#FF8A4C;
+  --glass:rgba(9,13,18,.72); --scrim:rgba(0,0,0,.55); --dots:rgba(233,239,246,.10);
+  --blend:lighter; --ink-alpha:.42;
+  --f-display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --f-body:"Geist","Segoe UI",system-ui,-apple-system,sans-serif;
+  --f-mono:"Geist Mono",ui-monospace,Menlo,Consolas,monospace;
+  --appbar:60px; --r:16px;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){
+  --bg:#F3F6F9; --surface:#FFFFFF; --surface-2:#EDF2F6; --line:#D9E1E9; --fg:#0D1620; --muted:#556472;
+  --accent:#0278B8; --accent-ink:#FFFFFF; --accent-soft:rgba(2,120,184,.10);
+  --good:#15804E; --good-soft:rgba(21,128,78,.10); --bad:#C2352A; --bad-soft:rgba(194,53,42,.09);
+  --c:#0092C8; --m:#C80A6E; --y:#D9A400; --k:#2B3035; --s1:#5A4CD0; --s2:#D3561C;
+  --glass:rgba(243,246,249,.8); --scrim:rgba(13,22,32,.35); --dots:rgba(13,22,32,.10);
+  --blend:multiply; --ink-alpha:.30; color-scheme:light}}
+:root[data-theme="light"]{
+  --bg:#F3F6F9; --surface:#FFFFFF; --surface-2:#EDF2F6; --line:#D9E1E9; --fg:#0D1620; --muted:#556472;
+  --accent:#0278B8; --accent-ink:#FFFFFF; --accent-soft:rgba(2,120,184,.10);
+  --good:#15804E; --good-soft:rgba(21,128,78,.10); --bad:#C2352A; --bad-soft:rgba(194,53,42,.09);
+  --c:#0092C8; --m:#C80A6E; --y:#D9A400; --k:#2B3035; --s1:#5A4CD0; --s2:#D3561C;
+  --glass:rgba(243,246,249,.8); --scrim:rgba(13,22,32,.35); --dots:rgba(13,22,32,.10);
+  --blend:multiply; --ink-alpha:.30; color-scheme:light}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+body.nav-open{overflow:hidden}
+button{font:inherit;color:inherit;-webkit-appearance:none;appearance:none}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.gutter{padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+
+/* App bar */
+.appbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;height:var(--appbar);display:flex;align-items:center;gap:12px;background:var(--glass);-webkit-backdrop-filter:blur(16px) saturate(150%);backdrop-filter:blur(16px) saturate(150%);border-bottom:1px solid var(--line)}
+.appbar .in{max-width:1240px;margin:0 auto;width:100%;display:flex;align-items:center;gap:12px}
+.iconbtn{flex:none;width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;cursor:pointer}
+.iconbtn span{display:block;width:18px;height:2px;background:var(--fg);border-radius:2px;box-shadow:0 -6px 0 var(--fg),0 6px 0 var(--fg)}
+.brand{flex:1;min-width:0;display:flex;align-items:center;gap:10px;background:none;border:0;padding:0;cursor:pointer;text-align:left}
+.plates{flex:none;display:grid;grid-template-columns:repeat(2,9px);gap:3px}
+.plates i{width:9px;height:9px;border-radius:50%;display:block}
+.brand b{font-family:var(--f-display);font-weight:800;font-size:1.05rem;letter-spacing:-.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ring{flex:none;display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:.78rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.ring svg{width:30px;height:30px;transform:rotate(-90deg)}
+.ring .tr{fill:none;stroke:var(--line);stroke-width:3}
+.ring .pr{fill:none;stroke:var(--accent);stroke-width:3;stroke-linecap:round;transition:stroke-dashoffset .6s ease}
+
+/* Shell */
+.shell{max-width:1240px;margin:0 auto;padding-block:20px 56px;display:grid;gap:28px}
+main{min-width:0}
+
+/* Drawer (mobile) / sidebar (desktop) */
+.drawer{position:fixed;z-index:40;top:0;bottom:0;left:0;width:min(86vw,340px);background:var(--surface);border-right:1px solid var(--line);transform:translateX(-104%);transition:transform .32s cubic-bezier(.2,.8,.2,1);overflow-y:auto;overscroll-behavior:contain;
+  padding:calc(env(safe-area-inset-top,0px) + 14px) 16px calc(env(safe-area-inset-bottom,0px) + 24px) max(16px, env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:18px}
+body.nav-open .drawer{transform:none}
+.scrim{position:fixed;inset:0;z-index:35;background:var(--scrim);opacity:0;pointer-events:none;transition:opacity .3s}
+body.nav-open .scrim{opacity:1;pointer-events:auto}
+.dhead{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.dhead b{font-family:var(--f-display);font-weight:800;font-size:1.2rem}
+.closebtn{width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--surface-2);cursor:pointer;font-size:1.3rem;line-height:1}
+.homebtn{display:flex;align-items:center;gap:10px;min-height:48px;text-align:left;border:1px solid var(--line);background:var(--surface-2);border-radius:12px;padding:10px 14px;cursor:pointer;font-weight:600}
+.homebtn[aria-current="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.trk h3{display:flex;align-items:center;gap:8px;margin:0 0 6px;font-family:var(--f-mono);font-weight:500;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.trk h3 i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.trk ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.lbtn{width:100%;min-height:44px;display:flex;align-items:center;gap:12px;text-align:left;background:none;border:0;border-radius:10px;padding:8px 10px;cursor:pointer;font-size:.95rem;line-height:1.3}
+.lbtn:hover{background:var(--surface-2)}
+.lbtn[aria-current="true"]{background:var(--accent-soft);color:var(--fg);box-shadow:inset 3px 0 0 var(--accent)}
+.dot{flex:none;width:16px;height:16px;border-radius:50%;border:1.5px solid var(--line);display:grid;place-items:center;font-size:10px;line-height:1;font-weight:700}
+.dot.part{border-color:var(--accent);background:linear-gradient(90deg,var(--accent) 50%,transparent 50%)}
+.dot.done{border-color:var(--good);background:var(--good);color:var(--bg)}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:999px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);cursor:pointer;font-weight:600;font-size:1rem;transition:transform .15s ease, box-shadow .2s ease}
+.btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px -10px var(--accent)}
+.btn:active{transform:translateY(0)}
+.btn.ghost{background:transparent;color:var(--fg);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--accent);box-shadow:none}
+
+/* Hero */
+.hero{position:relative;isolation:isolate;overflow:hidden;border-radius:24px;border:1px solid var(--line);background:var(--surface);padding:clamp(28px,7vw,72px) clamp(20px,6vw,64px) clamp(96px,20vw,190px)}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;z-index:-1;display:block}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background-image:radial-gradient(var(--dots) 1.3px,transparent 1.6px);background-size:14px 14px;-webkit-mask-image:radial-gradient(circle at 88% 8%,#000 0,transparent 55%);mask-image:radial-gradient(circle at 88% 8%,#000 0,transparent 55%)}
+.pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--glass);border-radius:999px;padding:6px 12px;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.pill i{width:7px;height:7px;border-radius:50%;background:var(--good);box-shadow:0 0 0 4px var(--good-soft)}
+.hero h1{font-family:var(--f-display);font-weight:800;font-size:clamp(2.1rem,8.2vw,4.4rem);line-height:.98;letter-spacing:-.035em;margin:18px 0 16px;max-width:15ch;text-wrap:balance}
+.hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--c),var(--m) 55%,var(--y));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.lead{font-size:clamp(1rem,2.6vw,1.15rem);color:var(--muted);max-width:52ch;margin:0 0 26px}
+.cta{display:flex;flex-wrap:wrap;gap:10px}
+.stats{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:30px;font-family:var(--f-mono);font-size:.8rem;color:var(--muted)}
+.stats b{display:block;font-family:var(--f-display);font-weight:800;font-size:1.6rem;color:var(--fg);letter-spacing:-.02em;line-height:1.1}
+
+.section{margin-top:44px}
+.kicker{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0 0 6px}
+.section h2{font-family:var(--f-display);font-weight:800;font-size:clamp(1.5rem,5vw,2.2rem);letter-spacing:-.025em;line-height:1.1;margin:0 0 18px;text-wrap:balance}
+.how{display:grid;grid-template-columns:1fr;gap:12px}
+.how div{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.how .n{font-family:var(--f-mono);font-size:.75rem;color:var(--accent)}
+.how b{display:block;font-family:var(--f-display);font-size:1.15rem;margin:4px 0 2px}
+.how span{color:var(--muted);font-size:.95rem}
+.cards{display:grid;grid-template-columns:1fr;gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px;display:flex;flex-direction:column;gap:12px;min-width:0;position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--tc)}
+.card .top{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.card h3{font-family:var(--f-display);font-weight:800;font-size:1.2rem;margin:0;letter-spacing:-.01em}
+.card .wk{font-family:var(--f-mono);font-size:.74rem;color:var(--muted);white-space:nowrap}
+.card ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.card .lbtn{padding:8px 6px}
+.mprog{display:flex;align-items:center;gap:10px;font-family:var(--f-mono);font-size:.78rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.bar{flex:1;height:6px;background:var(--surface-2);border-radius:3px;overflow:hidden}
+.bar b{display:block;height:100%;background:var(--tc,var(--accent));border-radius:3px;transition:width .6s ease}
+.reset{margin-top:28px;font-size:.88rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
+.reset button{background:none;border:0;color:var(--bad);text-decoration:underline;cursor:pointer;font-size:.88rem;padding:8px 0;min-height:44px}
+
+/* Lesson */
+.crumbs{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-family:var(--f-mono);font-size:.74rem;color:var(--muted);letter-spacing:.04em}
+.chip{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:999px;padding:4px 10px;background:var(--surface);color:var(--fg)}
+.chip i{width:8px;height:8px;border-radius:2px;display:inline-block}
+.ltitle{font-family:var(--f-display);font-weight:800;font-size:clamp(1.7rem,6vw,2.6rem);line-height:1.05;letter-spacing:-.03em;margin:12px 0 18px;text-wrap:balance}
+.stagebar{position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--appbar));z-index:20;padding-block:10px;margin-bottom:14px;background:var(--bg)}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:4px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.seg button{min-height:44px;border:0;border-radius:10px;background:none;cursor:pointer;font-weight:600;font-size:.92rem;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:6px;transition:background .2s,color .2s}
+.seg button[aria-selected="true"]{background:var(--surface-2);color:var(--fg);box-shadow:inset 0 0 0 1px var(--line)}
+.seg .ok{width:16px;height:16px;border-radius:50%;background:var(--good);color:var(--bg);font-size:10px;display:grid;place-items:center;font-weight:800}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:clamp(18px,4.5vw,34px);animation:rise .35s ease both}
+@keyframes rise{from{opacity:.25;transform:translateY(8px)}to{opacity:1;transform:none}}
+.read{max-width:68ch}
+.read p{margin:0 0 14px}
+.read ul,.read ol{padding-left:20px;margin:0 0 14px}
+.read li{margin-bottom:8px}
+.read strong{font-weight:600}
+.read h4,.panel h4{font-family:var(--f-display);font-weight:800;font-size:1.1rem;margin:22px 0 8px;letter-spacing:-.01em}
+kbd,code{font-family:var(--f-mono);font-size:.84em;background:var(--surface-2);border:1px solid var(--line);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere}
+.menu{font-family:var(--f-mono);font-size:.86em;color:var(--accent);overflow-wrap:anywhere}
+.note{border:1px solid var(--line);border-left:3px solid var(--y);background:var(--surface-2);padding:12px 14px;margin:18px 0;font-size:.95rem;border-radius:0 12px 12px 0}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+
+.q{border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px;background:var(--bg)}
+.q p.stem{margin:0 0 12px;font-weight:600;line-height:1.45}
+.q .opts{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;align-items:center;gap:12px;min-height:50px;text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:10px 12px;cursor:pointer;line-height:1.35;transition:border-color .15s,background .15s}
+.opt .k{flex:none;width:28px;height:28px;border-radius:8px;display:grid;place-items:center;background:var(--surface-2);font-family:var(--f-mono);font-size:.8rem;color:var(--muted)}
+.opt:hover:not(:disabled){border-color:var(--accent)}
+.opt.right{border-color:var(--good);background:var(--good-soft)}
+.opt.right .k{background:var(--good);color:var(--bg)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.opt.wrong .k{background:var(--bad);color:var(--bg)}
+.opt:disabled{cursor:default}
+.why{margin-top:12px;font-size:.94rem;color:var(--muted);animation:rise .3s ease both}
+.why b{color:var(--fg)}
+.score{display:flex;align-items:center;gap:10px;font-family:var(--f-display);font-weight:800;font-size:1.1rem;padding:14px 16px;border-radius:12px;margin-top:6px;animation:rise .35s ease both}
+.score.pass{background:var(--good-soft);color:var(--good)}
+.score.fail{background:var(--bad-soft);color:var(--bad)}
+.hint{font-family:var(--f-mono);font-size:.78rem;color:var(--muted);margin-top:10px}
+
+.steps{counter-reset:s;list-style:none;padding:0;margin:0 0 8px;max-width:70ch;display:flex;flex-direction:column;gap:10px}
+.steps li{counter-increment:s;position:relative;padding-left:42px;min-height:30px}
+.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:28px;height:28px;border-radius:8px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);font-family:var(--f-mono);font-size:.8rem;font-weight:500}
+.data{margin:14px 0 4px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--bg)}
+.data .hd{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 6px 6px 12px;border-bottom:1px solid var(--line);font-family:var(--f-mono);font-size:.74rem;color:var(--muted)}
+.data .hd span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.data .hd button{flex:none;min-height:36px;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:0 12px;cursor:pointer;font-family:var(--f-mono);font-size:.76rem}
+.data pre{margin:0;padding:12px;overflow-x:auto;font-family:var(--f-mono);font-size:.78rem;line-height:1.55;tab-size:16;-moz-tab-size:16}
+.checks{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.checks label{display:flex;gap:12px;align-items:flex-start;min-height:50px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;cursor:pointer;line-height:1.4;background:var(--bg);transition:border-color .15s,background .15s}
+.checks input{margin:2px 0 0;width:20px;height:20px;accent-color:var(--good);flex:none}
+.checks label.on{border-color:var(--good);background:var(--good-soft)}
+
+.footnav{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}
+.fbtn{min-width:0;min-height:64px;display:flex;flex-direction:column;justify-content:center;gap:2px;text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:10px 14px;cursor:pointer}
+.fbtn.next{text-align:right;align-items:flex-end;grid-column:2}
+.fbtn small{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.fbtn span{font-weight:600;font-size:.92rem;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fbtn:hover{border-color:var(--accent)}
+
+@media (max-width:430px){#ringTxt{display:none}.brand b{font-size:1rem}}
+@media (min-width:700px){
+  .how{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (min-width:980px){
+  .shell{grid-template-columns:280px minmax(0,1fr);gap:36px}
+  .menubtn,.dhead{display:none!important}
+  .scrim{display:none}
+  .drawer{position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--appbar) + 20px);align-self:start;z-index:1;width:auto;max-height:calc(100dvh - var(--appbar) - 40px);transform:none;transition:none;background:transparent;border:0;padding:0 4px 0 0}
+  body.nav-open{overflow:auto}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="appbar gutter">
+  <div class="in">
+    <button class="iconbtn menubtn" id="menuBtn" aria-label="Open lessons" aria-controls="nav" aria-expanded="false"><span></span></button>
+    <button class="brand" data-home aria-label="Report Design Academy home">
+      <span class="plates" aria-hidden="true"><i style="background:var(--c)"></i><i style="background:var(--m)"></i><i style="background:var(--y)"></i><i style="background:var(--k)"></i></span>
+      <b>Report Design Academy</b>
+    </button>
+    <div class="ring" title="Lessons completed"><svg viewBox="0 0 30 30" aria-hidden="true"><circle class="tr" cx="15" cy="15" r="12"/><circle class="pr" id="ringPr" cx="15" cy="15" r="12" stroke-dasharray="75.4" stroke-dashoffset="75.4"/></svg><span id="ringTxt">0/14</span></div>
+  </div>
+</header>
+<div class="scrim" id="scrim"></div>
+<div class="shell gutter">
+  <nav class="drawer" id="nav" aria-label="Lessons"></nav>
+  <main id="main"></main>
+</div>
+
+<script>
+const SAMPLE_IS = `Harbourline Holdings Ltd
+Consolidated income statement for the year ended 30 June 2026
+	Note	2026	2025
+		$'000	$'000
+Revenue	3	48,210	44,935
+Cost of sales		(29,604)	(27,818)
+Gross profit		18,606	17,117
+Operating expenses	4	(11,342)	(10,905)
+Operating profit		7,264	6,212
+Finance costs	5	(812)	(874)
+Profit before tax		6,452	5,338
+Income tax expense	6	(1,936)	(1,601)
+Profit for the year		4,516	3,737`;
+
+const SAMPLE_CHART = `Year	Revenue ($'000)
+2022	36,480
+2023	39,120
+2024	41,870
+2025	44,935
+2026	48,210`;
+
+const SAMPLE_DOC = `Chief Executive's Review
+Overview of the year
+Harbourline delivered revenue of $48.2 million, up 7.3% on the prior year, driven by growth in contract logistics and a full year of the Fremantle depot.
+Financial performance
+Operating profit rose to $7.3 million. Finance costs fell as we repaid $4.0 million of borrowings.
+Outlook
+We expect continued growth in FY2027, subject to freight volumes and fuel costs.`;
+
+const M = [
+ {id:"fin",name:"Financial reporting basics",color:"var(--k)",week:"Week 1",lessons:[
+  {id:"fin1",title:"What's inside an annual report",mins:15,
+   read:`<p>An annual report has two halves, and designers handle both.</p>
+   <ul><li><strong>Front half (narrative):</strong> chair's letter, CEO review, strategy, sustainability, governance. Photography, infographics, pull quotes and charts live here.</li>
+   <li><strong>Back half (financial statements):</strong> dense tables with strict rules. Accuracy beats creativity here.</li></ul>
+   <h4>The four primary statements</h4>
+   <ul><li><strong>Income statement</strong> (profit or loss): revenue minus costs for the year.</li>
+   <li><strong>Balance sheet</strong> (statement of financial position): what the company owns and owes on the last day of the year.</li>
+   <li><strong>Cash flow statement:</strong> cash coming in and going out.</li>
+   <li><strong>Statement of changes in equity:</strong> how shareholders' equity moved.</li></ul>
+   <p>After these come the <strong>notes to the financial statements</strong>, numbered and cross-referenced from the statements through a "Note" column. Then the auditor's report.</p>
+   <div class="note">Your job is not to understand accounting deeply. It is to set these documents so every number stays exactly where the accountants put it, and reads clearly.</div>`,
+   quiz:[
+    {q:"Which section of an annual report usually holds charts, photos and infographics?",o:["The notes to the financial statements","The front-half narrative section","The auditor's report","The balance sheet"],a:1,w:"Visual storytelling lives in the front half. The back half is mostly tables and text."},
+    {q:"The balance sheet shows…",o:["Revenue and costs over the year","Cash in and out","What the company owns and owes at one date","Changes in shareholders' equity"],a:2,w:"The balance sheet is a snapshot at the reporting date, not a full-year movement."},
+    {q:"What is the 'Note' column in a financial statement for?",o:["Designer comments","A cross-reference to the numbered note that explains that line","Footnotes about fonts","Page numbers"],a:1,w:"Note numbers point readers to the detailed explanation later in the report. They must stay correct when notes are reordered."}],
+   hands:{intro:"Find a real annual report and map its structure.",
+    steps:["Download a recent annual report PDF from any listed company's investor relations page (search the company name plus \"annual report 2025 PDF\").","Scroll through it and write down the page ranges for: front-half narrative, the four primary statements, the notes, and the auditor's report.","Pick one statement and find two line items that have a note number. Jump to those notes and confirm they match."],
+    checks:["I listed page ranges for every section","I found all four primary statements","I followed two note references to the right notes"]}},
+  {id:"fin2",title:"Reading numbers like a typesetter",mins:15,
+   read:`<p>Financial tables follow conventions. Breaking them makes a report look wrong to any finance reader.</p>
+   <ul><li><strong>Negatives in parentheses:</strong> <code>(1,936)</code> means minus 1,936. Never swap to a minus sign unless the client style says so.</li>
+   <li><strong>Units in the header:</strong> <code>$'000</code> means figures are in thousands. <code>48,210</code> is $48.21 million.</li>
+   <li><strong>Current year first:</strong> 2026 column sits left of 2025, and is often set bold or shaded.</li>
+   <li><strong>Totals get rules:</strong> a single line above a subtotal, a double line under the final total.</li>
+   <li><strong>Alignment:</strong> numbers align right (or on the decimal) so units line up. Use <strong>tabular figures</strong>, where every digit is the same width.</li>
+   <li><strong>Parentheses hang:</strong> the closing bracket sits outside the column edge so the digits still line up with positive numbers.</li></ul>
+   <div class="note">Golden rule: never retype a number. Copy from the source, then proof it against the source.</div>`,
+   quiz:[
+    {q:"In a table headed $'000, what does 4,516 represent?",o:["$4,516","$45,160","$4,516,000","$4.5 billion"],a:2,w:"$'000 means thousands, so 4,516 × 1,000 = $4,516,000."},
+    {q:"How is a negative number usually shown in a financial statement?",o:["In red","With a minus sign","In parentheses, like (812)","In italics"],a:2,w:"Parentheses are the standard convention. Colour is never relied on, because reports get printed in black."},
+    {q:"Why use tabular (fixed-width) figures in tables?",o:["They look more modern","Every digit is the same width, so columns line up","They print faster","They are required by law"],a:1,w:"Proportional figures make a 1 narrower than an 8, which breaks vertical alignment of digits."}],
+   hands:{intro:"Mark up a statement by hand before you ever touch software.",
+    steps:["Copy the sample income statement below into a notebook or a plain text file.","Circle every negative number. Underline every subtotal. Box the final total.","Check the maths: Revenue minus Cost of sales should equal Gross profit, for both years.","Write the 2026 Profit for the year in full dollars."],
+    data:SAMPLE_IS,dataLabel:"Sample income statement (tab-separated)",
+    checks:["I identified all 5 negative lines","Gross profit checks out for 2026 and 2025","I wrote profit as $4,516,000"]}}]},
+
+ {id:"wk",name:"Workiva",color:"var(--s1)",week:"Week 1",lessons:[
+  {id:"wk1",title:"How Workiva fits the report process",mins:15,
+   read:`<p>Workiva is a cloud platform where finance teams build reports from <strong>linked data</strong>. A number lives once in a source spreadsheet and is linked into documents, presentations and filings.</p>
+   <ul><li><strong>Spreadsheets:</strong> hold the source figures (often pulled from the accounting system).</li>
+   <li><strong>Documents:</strong> the report text and tables. Values here are links back to the spreadsheet.</li>
+   <li><strong>Links:</strong> change a source cell and every linked copy updates. This is why finance teams love it.</li>
+   <li><strong>Collaboration:</strong> comments, tasks, permissions and version history track who changed what.</li>
+   <li><strong>Filing:</strong> it is widely used to tag reports for regulators (XBRL / iXBRL).</li></ul>
+   <h4>Where the designer comes in</h4>
+   <p>In many teams the numbers are finalised in Workiva, then exported (PDF or Word, or values copied out) for the designer to set in InDesign. Some teams design the final document inside Workiva itself. Either way: <strong>Workiva is the source of truth.</strong> If your InDesign number differs from Workiva, InDesign is wrong.</p>`,
+   quiz:[
+    {q:"What happens to linked values when the source cell in a Workiva spreadsheet changes?",o:["Nothing until you re-type them","They all update to match","They turn red","They are deleted"],a:1,w:"Linking means one source, many destinations. That is the core idea of Workiva."},
+    {q:"Your InDesign table shows 7,264 but Workiva shows 7,246. What do you do?",o:["Keep InDesign, it was signed off","Average them","Treat Workiva as correct and flag the difference","Ask a designer colleague"],a:2,w:"Workiva is the source of truth. Fix your file and tell the finance owner, since it may mean a late change you missed."},
+    {q:"Which of these is Workiva commonly used for?",o:["Photo retouching","Regulatory XBRL tagging and filing","Logo design","Video editing"],a:1,w:"Tagging financial data for regulators is a major Workiva use case."}],
+   hands:{intro:"Workiva needs a company licence. If you don't have access, practise the same linking idea with Excel and Word.",
+    steps:["<strong>With Workiva access:</strong> open a practice workspace, create a spreadsheet with the sample income statement, then create a document and link three values from it.","<strong>Without access:</strong> paste the sample into Excel. In Word, copy one Excel cell and use <span class=\"menu\">Paste Special › Paste Link</span>.","Change the source value (e.g. Revenue 2026 to 48,500).","Update the destination (<span class=\"menu\">right-click › Update Link</span> in Word) and confirm it changed.","Change the value back."],
+    data:SAMPLE_IS,dataLabel:"Sample income statement (tab-separated)",
+    checks:["I created at least three linked values","Changing the source updated the destination","I can explain in one sentence why linking reduces errors"]}},
+  {id:"wk2",title:"Reviewing and handing off",mins:12,
+   read:`<p>Most designer time in Workiva is spent on review and handoff, not building.</p>
+   <ul><li><strong>Comments:</strong> attach a question to a specific value instead of sending an email. It stays with the number.</li>
+   <li><strong>Tasks:</strong> assign a fix to a named person with a due date.</li>
+   <li><strong>History:</strong> view earlier versions to see when a figure changed.</li>
+   <li><strong>Export:</strong> documents export to PDF and Word. Exports are snapshots; they do not update.</li></ul>
+   <h4>A safe handoff routine</h4>
+   <ol><li>Get the export date and time from the finance owner.</li><li>Set the numbers in InDesign.</li><li>Before print, re-export and compare against your proof.</li><li>Log every late change you receive.</li></ol>`,
+   quiz:[
+    {q:"Is an exported PDF from Workiva still linked to the data?",o:["Yes, it updates live","No, it's a snapshot at export time","Only if saved to the cloud","Only on Tuesdays"],a:1,w:"Exports freeze the data at that moment. Always note the export date."},
+    {q:"Best way to question a single figure in Workiva?",o:["Email the whole team","Leave a comment on that value","Change it yourself","Ignore it"],a:1,w:"Comments stay attached to the exact value, so the answer is easy to trace."},
+    {q:"Why compare a fresh export against your proof before print?",o:["To catch late number changes","To check fonts","To make the PDF smaller","It isn't needed"],a:0,w:"Numbers often change late. A final comparison catches them."}],
+   hands:{intro:"Practise a review cycle on paper or in Word.",
+    steps:["Open your Word file from the last lesson. Turn on <span class=\"menu\">Review › Track Changes</span>.","Add two comments on specific numbers asking a question (as you would in Workiva).","Create a simple change log table: Date · Item · Old value · New value · Requested by.","Log the Revenue change you made earlier."],
+    checks:["I added two comments attached to numbers","My change log has all five columns","I logged at least one change"]}}]},
+
+ {id:"id",name:"InDesign",color:"var(--m)",week:"Weeks 2–3",lessons:[
+  {id:"id1",title:"Document setup and basic settings",mins:20,
+   read:`<p>Get the setup right first. Fixing it later is painful in a 200-page report.</p>
+   <ul><li><strong>New document:</strong> <span class="menu">File › New › Document</span>. Choose <strong>Print</strong> intent. A4 is 210 × 297 mm.</li>
+   <li><strong>Facing pages:</strong> on for anything bound (reports usually are).</li>
+   <li><strong>Margins and columns:</strong> e.g. 15 mm top/outside, 20 mm inside, 2 or 12 columns with a 5 mm gutter.</li>
+   <li><strong>Bleed:</strong> 3 mm on all sides, so colour runs past the trim.</li>
+   <li><strong>Units:</strong> <span class="menu">Edit › Preferences › Units &amp; Increments</span> (on Mac, <span class="menu">InDesign › Settings</span>): mm for layout, points for type.</li>
+   <li><strong>Parent pages</strong> (formerly master pages): items placed here, like page numbers and running heads, appear on every page using that parent.</li>
+   <li><strong>Page numbers:</strong> on the parent page, draw a text frame and use <span class="menu">Type › Insert Special Character › Markers › Current Page Number</span>.</li></ul>
+   <div class="note">Shortcuts to learn now: <kbd>W</kbd> preview mode, <kbd>Ctrl/Cmd + ;</kbd> show guides, <kbd>Ctrl/Cmd + 0</kbd> fit page.</div>`,
+   quiz:[
+    {q:"What is the standard bleed for most commercial print?",o:["0 mm","1 mm","3 mm","10 mm"],a:2,w:"3 mm is the common default. Always confirm with the printer."},
+    {q:"Where should you place the page number so it appears on every page?",o:["On each page by hand","On the parent page using the Current Page Number marker","In the slug","In a paragraph style"],a:1,w:"The marker on a parent page updates automatically on every page that uses it."},
+    {q:"A bound report should be set up with…",o:["Facing pages on","Facing pages off","Web intent","Landscape only"],a:0,w:"Facing pages gives you left/right spreads with inside and outside margins."}],
+   hands:{intro:"Build the shell for a 12-page report.",
+    steps:["Create a new Print document: A4, 12 pages, facing pages on, 3 mm bleed.","Margins: top 15, bottom 20, inside 20, outside 15 mm. Columns: 2, gutter 5 mm.","Set ruler units to mm and type units to points.","On parent page A, add a page number at the bottom outside corner of each page, and a running head \"Harbourline Annual Report 2026\".","Open the Pages panel and confirm pages 2–12 show the page number. Save as <code>HAR26_shell.indd</code>."],
+    checks:["Bleed guides (red) show 3 mm outside the page","Page numbers count correctly on every page","Left and right pages mirror their margins","File is saved with a clear name"]}},
+  {id:"id2",title:"Text layout and styles",mins:25,
+   read:`<p>Never format text by hand in a report. Use <strong>styles</strong>, so one change updates every instance.</p>
+   <ul><li><strong>Threading:</strong> click a frame's out-port (small box at bottom-right) then click another frame to flow text across. Red <code>+</code> means overset (hidden) text.</li>
+   <li><strong>Paragraph styles</strong> (<span class="menu">Window › Styles › Paragraph Styles</span>): Body, Heading 1, Heading 2, Pull quote, Caption. Base them on each other so Body changes ripple through.</li>
+   <li><strong>Character styles:</strong> for small runs like bold lead-ins or footnote markers.</li>
+   <li><strong>Baseline grid:</strong> lines of text in neighbouring columns sit on the same baselines. Set the grid increment to your body leading (e.g. 9.5/13 pt body → 13 pt grid).</li>
+   <li><strong>Hyphenation &amp; justification:</strong> left-aligned (ragged right) is easier to read and avoids rivers of space.</li></ul>
+   <div class="note">Use <span class="menu">Space Before/After</span> in the style for gaps between paragraphs. Never hit Return twice.</div>`,
+   quiz:[
+    {q:"A red + on a text frame's out-port means…",o:["The frame is locked","There is overset text that doesn't fit","The font is missing","The text is spell-checked"],a:1,w:"Overset text is hidden. Thread it to another frame or edit to fit."},
+    {q:"Why use paragraph styles instead of manual formatting?",o:["They print in colour","One edit updates every paragraph with that style","They reduce file size","Printers require them"],a:1,w:"Styles keep a long document consistent and make global changes fast."},
+    {q:"Body text is 9.5 pt on 13 pt leading. What baseline grid increment fits best?",o:["9.5 pt","10 pt","13 pt","20 pt"],a:2,w:"The grid matches the body leading so every line locks to it."}],
+   hands:{intro:"Lay out a two-page CEO review in your shell file.",
+    steps:["Copy the sample text below. Place it on pages 2–3 in a two-column frame, threaded across both pages.","Create paragraph styles: <code>H1</code> (title), <code>H2</code> (section heads), <code>Body</code> (9.5/13 pt, left aligned), <code>Lead</code> (first paragraph, larger).","Apply the styles. No local overrides (no <code>+</code> next to style names when text is selected).","Set the baseline grid to 13 pt and align Body to it. Toggle the grid with <span class=\"menu\">View › Grids &amp; Guides</span>.","Add a pull quote using a new <code>Pull quote</code> style."],
+    data:SAMPLE_DOC,dataLabel:"Sample CEO review text",
+    checks:["No overset text","Every paragraph uses a named style","Body text lines up across columns","Changing the Body size updates all body text"]}},
+  {id:"id3",title:"Financial tables",mins:30,
+   read:`<p>Tables are the core of the back half. Build them with <strong>table and cell styles</strong>.</p>
+   <ul><li><strong>Importing:</strong> <span class="menu">File › Place</span> an Excel file with <em>Show Import Options</em> ticked, or paste tab-separated text and use <span class="menu">Table › Convert Text to Table</span>.</li>
+   <li><strong>Column widths:</strong> wide first column for labels, narrow note column, equal widths for each year.</li>
+   <li><strong>Number alignment:</strong> right-align figure cells. For decimal alignment, set a decimal tab in the Tabs panel and insert a tab before the number (<span class="menu">Type › Insert Special Character › Other › Tab</span>).</li>
+   <li><strong>Header rows:</strong> <span class="menu">Table › Table Options › Headers and Footers</span> makes headers repeat when a table breaks across pages.</li>
+   <li><strong>Rules:</strong> use cell strokes, not drawn lines. Single rule above subtotals, double rule under the final total.</li>
+   <li><strong>Styles:</strong> make cell styles (Label, Figure, Figure-Current-Year, Total) and one table style that uses them.</li></ul>`,
+   quiz:[
+    {q:"Your table breaks across two pages. How do you make the year headings appear on both?",o:["Copy the heading row by hand","Set header rows in Table Options › Headers and Footers","Use a parent page","Group the table"],a:1,w:"Header rows repeat automatically on every frame the table flows into."},
+    {q:"How should rules above subtotals be created?",o:["Draw lines with the Line tool","Use cell strokes / cell styles","Underline the text","Use a background image"],a:1,w:"Drawn lines drift when text reflows. Cell strokes move with the table."},
+    {q:"Figure columns should normally be…",o:["Centred","Left aligned","Right aligned or decimal aligned","Justified"],a:2,w:"Right or decimal alignment keeps units, tens and hundreds stacked."}],
+   hands:{intro:"Set the Harbourline income statement as a production-ready table.",
+    steps:["Copy the sample data below into a text frame on page 10 and convert it to a table.","Set widths: label 90 mm, note 12 mm, each year 25 mm.","Make the first two rows header rows. Bold or shade the 2026 column.","Right-align figures. Let the closing parenthesis hang outside the column edge (try a right indent or a tab), so digits align with positive numbers.","Add a single rule above Gross profit, Operating profit and Profit before tax. Add a double rule under Profit for the year.","Save it all as cell styles and a table style called <code>Fin Statement</code>."],
+    data:SAMPLE_IS,dataLabel:"Sample income statement (tab-separated)",
+    checks:["Every number matches the source exactly","Digits line up vertically in each year column","Subtotal and total rules are cell strokes","Header rows repeat if I make the frame shorter","A table style called Fin Statement exists"]}},
+  {id:"id4",title:"Preflight and PDF export",mins:15,
+   read:`<p>Before anything leaves your desk, check it.</p>
+   <ul><li><strong>Preflight panel</strong> (<span class="menu">Window › Output › Preflight</span>): green dot means no errors. It flags missing links, missing fonts and overset text.</li>
+   <li><strong>Links panel:</strong> every image should be OK (no red stop sign or yellow warning triangle).</li>
+   <li><strong>Print PDF:</strong> <span class="menu">File › Export › Adobe PDF (Print)</span>, preset <strong>PDF/X-1a</strong> or <strong>PDF/X-4</strong> (ask your printer), marks and bleeds on, use document bleed.</li>
+   <li><strong>Review PDF:</strong> a lighter preset like <em>Smallest File Size</em> for emailing proofs.</li>
+   <li><strong>Package:</strong> <span class="menu">File › Package</span> collects the INDD, fonts and links into one folder for handover.</li></ul>`,
+   quiz:[
+    {q:"What does a red dot in the Preflight panel mean?",o:["File is saved","There are errors to fix","Colour is wrong","Document is in preview mode"],a:1,w:"Red means problems like overset text or missing links. Fix until it's green."},
+    {q:"Which preset family is meant for commercial print?",o:["Smallest File Size","PDF/X","Interactive PDF","High Quality Web"],a:1,w:"PDF/X presets are print standards. Confirm which one with your printer."},
+    {q:"File › Package is used to…",o:["Compress the PDF","Collect the file, fonts and links for handover","Send to the printer directly","Spell-check"],a:1,w:"Packaging ensures the next person has everything they need to open and output the file."}],
+   hands:{intro:"Output your practice report.",
+    steps:["Open the Preflight panel and fix every error until it shows green.","Export a print PDF with a PDF/X preset, crop marks and document bleed.","Export a second, small review PDF.","Package the document into a folder."],
+    checks:["Preflight is green","Print PDF shows crop marks and bleed","Review PDF is under 5 MB","Package folder contains Links and Document fonts folders"]}}]},
+
+ {id:"ai",name:"Illustrator",color:"var(--y)",week:"Week 4",lessons:[
+  {id:"ai1",title:"Getting around Illustrator",mins:20,
+   read:`<p>Illustrator makes <strong>vector</strong> graphics: shapes defined by maths, so they scale without blurring. Perfect for icons, diagrams and charts.</p>
+   <ul><li><strong>Artboards:</strong> your canvases. One file can hold many (<kbd>Shift+O</kbd> to edit them).</li>
+   <li><strong>Two selection tools:</strong> Selection <kbd>V</kbd> moves whole objects. Direct Selection <kbd>A</kbd> moves individual points.</li>
+   <li><strong>Shapes:</strong> Rectangle <kbd>M</kbd>, Ellipse <kbd>L</kbd>, Pen <kbd>P</kbd>.</li>
+   <li><strong>Fill and stroke:</strong> the two swatches at the bottom of the toolbar. <kbd>X</kbd> swaps which is active.</li>
+   <li><strong>Pathfinder</strong> (<span class="menu">Window › Pathfinder</span>): unite, subtract or intersect shapes to build icons.</li>
+   <li><strong>Swatches:</strong> make document colour mode CMYK for print (<span class="menu">File › Document Color Mode</span>). Save brand colours as <em>global</em> swatches so editing one updates everything.</li>
+   <li><strong>Layers:</strong> keep guides, artwork and labels on separate layers. Lock what you aren't editing.</li></ul>`,
+   quiz:[
+    {q:"Why is Illustrator better than Photoshop for charts and icons?",o:["It has more filters","Vector shapes scale without losing quality","It opens faster","It supports RGB only"],a:1,w:"Vectors stay sharp at any size, which matters in print."},
+    {q:"Which tool moves individual anchor points?",o:["Selection (V)","Direct Selection (A)","Hand (H)","Zoom (Z)"],a:1,w:"Direct Selection edits points and segments within a shape."},
+    {q:"What does a global swatch do?",o:["Prints on every page","Updates every object using it when you edit the swatch","Converts to RGB","Locks the colour"],a:1,w:"Global swatches are the vector equivalent of a style."}],
+   hands:{intro:"Build three simple report icons.",
+    steps:["New document, Print profile, CMYK. Create three 20 × 20 mm artboards.","Create a global swatch for your brand colour (e.g. C100 M40 Y0 K20).","Icon 1, a document: rectangle plus a folded corner (use Pathfinder Minus Front with a triangle).","Icon 2, growth: three rising bars and an arrow.","Icon 3, a pin: circle plus triangle united with Pathfinder.","Edit the global swatch and watch all three icons update."],
+    checks:["Document is CMYK","All three icons use the global swatch","Pathfinder was used for at least one icon","Editing the swatch recolours all icons"]}},
+  {id:"ai2",title:"Editable charts",mins:30,
+   read:`<p>Illustrator's Graph tools make charts that keep their <strong>data attached</strong>. When finance sends new numbers, you update the data, not redraw the chart.</p>
+   <ul><li><strong>Make one:</strong> pick the Column Graph tool (<kbd>J</kbd>, or hold the tool to see Bar, Line, Pie and others), drag a box, then type or paste data into the grid.</li>
+   <li><strong>Paste data:</strong> tab-separated text from Excel pastes straight into the data grid. First row is labels; first column is categories.</li>
+   <li><strong>Edit data later:</strong> select the graph, <span class="menu">Object › Graph › Data</span>, change values, click the tick to apply.</li>
+   <li><strong>Style without breaking it:</strong> use the <strong>Group Selection</strong> tool (under Direct Selection) to select all bars of one series, then recolour.</li>
+   <li><strong>The big rule:</strong> <strong>never ungroup</strong> a graph you may need to edit. Ungrouping converts it to plain shapes and the data is gone.</li>
+   <li><strong>Into InDesign:</strong> save as <code>.ai</code> and <span class="menu">File › Place</span> it as a linked file. Edit in Illustrator and the link updates.</li></ul>
+   <div class="note">Many teams keep one "live" master chart file and a separate styled copy. Label your layers so the next person knows which is which.</div>`,
+   quiz:[
+    {q:"How do you change the numbers in an existing Illustrator graph?",o:["Redraw the bars","Object › Graph › Data","Type over the labels","Use Pathfinder"],a:1,w:"The data grid stays attached to the graph until it is ungrouped."},
+    {q:"What happens when you ungroup a graph?",o:["Nothing","It becomes plain shapes and loses its data","It turns into a pie chart","It exports to Excel"],a:1,w:"Ungrouping is one-way. Do it only on a final copy, never on your master."},
+    {q:"Which tool selects every bar in one series without breaking the graph?",o:["Group Selection tool","Pen tool","Scissors","Eyedropper"],a:0,w:"Group Selection selects nested groups, so one click picks a bar and the next click picks its whole series."}],
+   hands:{intro:"Build a five-year revenue chart that stays editable.",
+    steps:["Create an artboard 120 × 70 mm. Draw a column graph across it.","Paste the sample data below into the data grid and apply.","Recolour the bars with your global swatch using Group Selection. Make the 2026 bar a stronger tint.","Set axis labels to your body font at 7 pt. Remove the chart border if shown.","Change 2026 revenue to 48,500 using Object › Graph › Data and confirm the chart redraws with styling kept. Then change it back.","Save as <code>HAR26_revenue_chart.ai</code> and place it into page 4 of your InDesign file."],
+    data:SAMPLE_CHART,dataLabel:"Revenue by year (tab-separated)",
+    checks:["The graph is still editable via Object › Graph › Data","Bars use my brand swatch and styling survived a data edit","The chart is placed in InDesign as a linked .ai file","Bar heights match the data (2026 is tallest)"]}}]},
+
+ {id:"wd",name:"Microsoft Word",color:"var(--c)",week:"Week 5",lessons:[
+  {id:"wd1",title:"Styles, structure and long documents",mins:20,
+   read:`<p>Word is where drafts, board papers and many smaller reports live. The same rule applies as in InDesign: <strong>use styles</strong>.</p>
+   <ul><li><strong>Heading 1, 2, 3:</strong> from the Home tab Styles gallery. They power the Navigation Pane and table of contents.</li>
+   <li><strong>Modify a style:</strong> right-click it in the gallery › Modify. Every paragraph using it updates.</li>
+   <li><strong>Navigation Pane:</strong> <span class="menu">View › Navigation Pane</span> shows your headings as an outline you can drag to reorder.</li>
+   <li><strong>Table of contents:</strong> <span class="menu">References › Table of Contents</span>. Update it with <kbd>F9</kbd> after edits.</li>
+   <li><strong>Section breaks:</strong> <span class="menu">Layout › Breaks › Next Page</span> let you change orientation or headers for one part of the document.</li>
+   <li><strong>Headers and footers:</strong> untick <em>Link to Previous</em> to make one section's header different.</li></ul>`,
+   quiz:[
+    {q:"What makes a heading appear in the automatic table of contents?",o:["Bold text","Using a Heading style","A larger font","Underlining"],a:1,w:"The TOC reads Heading styles, not visual formatting."},
+    {q:"You need one landscape page in a portrait document. What do you insert?",o:["A page break","Section breaks before and after it","A column break","A text box"],a:1,w:"Page setup is per section, so the landscape page needs its own section."},
+    {q:"How do you refresh a table of contents after editing?",o:["Delete and re-insert it","Click it and press F9 (Update Field)","Save the file","It never needs updating"],a:1,w:"F9 updates fields, including the TOC."}],
+   hands:{intro:"Turn a plain draft into a structured document.",
+    steps:["Paste the sample text below into a new Word document.","Apply Heading 1 to the title and Heading 2 to the three section heads.","Modify Normal to 10.5 pt with 6 pt space after. Modify Heading 2 to your brand colour.","Insert a table of contents on a new first page.","Add a section break and make one landscape page for a table. Give it a different footer."],
+    data:SAMPLE_DOC,dataLabel:"Sample CEO review text",
+    checks:["Navigation Pane lists all headings","TOC updates with F9 after renaming a heading","Only one page is landscape","That page's footer differs from the rest"]}},
+  {id:"wd2",title:"Tables and tracked changes",mins:15,
+   read:`<p>Finance teams send Word files full of tables and edits. Two skills matter most.</p>
+   <h4>Tables</h4>
+   <ul><li>Paste from Excel, then use <span class="menu">Table Design</span> and <span class="menu">Layout</span> tabs.</li>
+   <li>Right-align number columns. For decimal alignment, select the column and set a <strong>decimal tab</strong> on the ruler.</li>
+   <li><span class="menu">Layout › Repeat Header Rows</span> keeps headings on every page.</li></ul>
+   <h4>Tracked changes</h4>
+   <ul><li><span class="menu">Review › Track Changes</span> records every edit with the author's name.</li>
+   <li>Accept or reject each change from the Review tab.</li>
+   <li><span class="menu">Review › Compare</span> shows differences between two versions when someone forgot to track.</li></ul>`,
+   quiz:[
+    {q:"A colleague edited the file without Track Changes. How can you see what changed?",o:["You can't","Review › Compare with the old version","Undo history","Spell check"],a:1,w:"Compare creates a marked-up document showing every difference."},
+    {q:"How do you keep a table's header row on every page in Word?",o:["Copy it manually","Layout › Repeat Header Rows","Insert a page break","Use a text box"],a:1,w:"Same idea as InDesign header rows."},
+    {q:"What does Track Changes record with each edit?",o:["Only the time","The author and the change","The printer used","Nothing visible"],a:1,w:"That is what makes review accountable."}],
+   hands:{intro:"Format a statement and run a review.",
+    steps:["Paste the sample income statement into Word and convert it to a table (<span class=\"menu\">Insert › Table › Convert Text to Table</span>, separated by tabs).","Right-align figures, add a rule above subtotals and a double rule under the final total.","Save a copy. Turn on Track Changes and change two numbers.","Use Review › Compare between the two files. Accept one change and reject the other."],
+    data:SAMPLE_IS,dataLabel:"Sample income statement (tab-separated)",
+    checks:["Figures are right-aligned and line up","Rules match financial conventions","Compare showed both edits","I accepted one change and rejected one"]}}]},
+
+ {id:"ps",name:"Photoshop",color:"var(--s2)",week:"Week 6",lessons:[
+  {id:"ps1",title:"Simple photo editing for reports",mins:20,
+   read:`<p>In reports, Photoshop is mainly for preparing photos: executive portraits, sites, products.</p>
+   <ul><li><strong>Resolution:</strong> print needs about <strong>300 ppi at the size used</strong>. Check in <span class="menu">Image › Image Size</span>. Untick <em>Resample</em> to see true print size at 300 ppi.</li>
+   <li><strong>Crop:</strong> Crop tool <kbd>C</kbd>. Untick <em>Delete Cropped Pixels</em> so you can recrop later.</li>
+   <li><strong>Adjustment layers</strong> (<span class="menu">Layer › New Adjustment Layer</span>): Levels or Curves for brightness and contrast, Hue/Saturation for colour. They are non-destructive and can be edited anytime.</li>
+   <li><strong>Clean-up:</strong> Spot Healing Brush <kbd>J</kbd> for dust, blemishes and small distractions.</li>
+   <li><strong>Straighten:</strong> in the Crop tool, use the Straighten button and drag along a horizon.</li>
+   <li><strong>Save:</strong> keep a layered <code>.psd</code> master. Place the PSD (or a TIFF) into InDesign.</li></ul>
+   <div class="note">Many printers want images left in RGB and converted at PDF export. Ask before converting to CMYK yourself.</div>`,
+   quiz:[
+    {q:"What resolution do photos need for print at final size?",o:["72 ppi","150 ppi","About 300 ppi","1200 ppi"],a:2,w:"300 ppi at the placed size is the usual target."},
+    {q:"Why use adjustment layers instead of Image › Adjustments?",o:["They're faster","They are non-destructive and editable later","They make files smaller","They convert to CMYK"],a:1,w:"You can tweak or delete an adjustment layer at any time without harming the photo."},
+    {q:"Which tool removes a small speck of dust?",o:["Spot Healing Brush","Pen tool","Gradient tool","Magic Wand"],a:0,w:"Spot Healing blends the spot with surrounding texture automatically."}],
+   hands:{intro:"Prepare a portrait for page 2.",
+    steps:["Find a free portrait photo (e.g. from Unsplash or Pexels).","Check its size at 300 ppi in Image Size (Resample off). Note the largest size it can print.","Crop to 60 × 80 mm with Delete Cropped Pixels off. Straighten if needed.","Add a Curves adjustment layer to lift the midtones slightly. Add Hue/Saturation to tame any colour cast.","Remove three small blemishes with the Spot Healing Brush on a new empty layer (tick <em>Sample All Layers</em>).","Save as <code>CEO_portrait.psd</code> and place it in your InDesign file."],
+    checks:["Effective resolution in InDesign's Info or Links panel is 300 ppi or more","Adjustments are on adjustment layers","Healing is on its own layer","Original pixels are untouched under the layers"]}},
+  {id:"ps2",title:"Cut-outs and exporting",mins:15,
+   read:`<p>Cut-outs (people or products without a background) are common on report covers and divider pages.</p>
+   <ul><li><strong>Select Subject:</strong> <span class="menu">Select › Subject</span> finds the main subject automatically.</li>
+   <li><strong>Refine:</strong> <span class="menu">Select › Select and Mask</span> to clean hair and soft edges.</li>
+   <li><strong>Layer mask:</strong> click <em>Add Layer Mask</em> to hide the background without deleting it. Paint black to hide, white to reveal.</li>
+   <li><strong>For print:</strong> save as PSD (transparency is kept when placed in InDesign).</li>
+   <li><strong>For web or email:</strong> <span class="menu">File › Export › Export As</span> to PNG or JPG at the needed pixel size.</li></ul>`,
+   quiz:[
+    {q:"What does a layer mask do?",o:["Deletes pixels","Hides parts of a layer without deleting them","Changes colour mode","Flattens the file"],a:1,w:"Masks are non-destructive. Paint white to bring back anything you hid."},
+    {q:"On a mask, painting black…",o:["Reveals","Hides","Blurs","Sharpens"],a:1,w:"Black conceals, white reveals."},
+    {q:"Best format to place a cut-out with transparency into InDesign?",o:["JPG","PSD","GIF","BMP"],a:1,w:"PSD keeps transparency and layers. JPG has no transparency."}],
+   hands:{intro:"Make a cut-out for a section divider.",
+    steps:["Open a photo of a person or product.","Use Select › Subject, then Select and Mask to refine the edges.","Add a layer mask. Fix any mistakes by painting on the mask.","Save as PSD and place it in InDesign over a coloured background.","Export a 1200 px wide PNG for an email banner."],
+    checks:["Background is hidden with a mask, not deleted","Edges look clean on a coloured background in InDesign","PNG export is 1200 px wide"]}}]}
+];
+
+const KEY="rda-progress-v1";
+let P={};
+try{P=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){P={}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(P))}catch(e){}}
+function st(id){return P[id]||(P[id]={read:false,quiz:null,checks:[]})}
+const ALL=M.flatMap(m=>m.lessons.map(l=>({...l,mod:m})));
+const TOTAL_MIN=ALL.reduce((a,l)=>a+l.mins,0);
+function qPassed(l){const s=P[l.id];return !!s&&s.quiz!==null&&s.quiz>=l.quiz.length-1}
+function lessonDone(l){const s=P[l.id];if(!s)return false;return s.read&&qPassed(l)&&l.hands.checks.every((_,i)=>s.checks[i])}
+function lessonStarted(l){const s=P[l.id];return !!s&&(s.read||s.quiz!==null||s.checks.some(Boolean))}
+let view={kind:"home"},stage="read",quizState={};
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+function dot(l){const d=lessonDone(l),p=!d&&lessonStarted(l);return `<span class="dot ${d?"done":p?"part":""}">${d?"✓":""}</span>`}
+
+/* ---------- Ink-wave hero canvas ---------- */
+let inkStop=null;
+function startInk(cv){
+  const ctx=cv.getContext("2d");if(!ctx)return null;
+  const css=getComputedStyle(document.documentElement);
+  const col=n=>css.getPropertyValue(n).trim();
+  const inks=[col("--c"),col("--m"),col("--y")];
+  const blend=col("--blend")||"lighter",alpha=parseFloat(col("--ink-alpha"))||.4;
+  let w=0,h=0,raf=0,running=true;
+  const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function size(){const r=cv.getBoundingClientRect(),d=Math.min(window.devicePixelRatio||1,2);w=r.width;h=r.height;cv.width=Math.round(w*d);cv.height=Math.round(h*d);ctx.setTransform(d,0,0,d,0,0)}
+  function draw(t){
+    ctx.clearRect(0,0,w,h);ctx.globalCompositeOperation=blend;
+    inks.forEach((c,i)=>{
+      const base=h*(.70+i*.06),amp=Math.max(h*.07,18),sp=1+i*.35;
+      ctx.beginPath();ctx.moveTo(0,h);
+      for(let x=0;x<=w+8;x+=8){
+        const y=base+Math.sin(x*.0045+t*.00042*sp+i*2.1)*amp+Math.sin(x*.013-t*.0007+i)*amp*.35;
+        ctx.lineTo(x,y);
+      }
+      ctx.lineTo(w,h);ctx.closePath();
+      const g=ctx.createLinearGradient(0,base-amp,0,h);
+      g.addColorStop(0,c);g.addColorStop(1,"rgba(0,0,0,0)");
+      ctx.globalAlpha=alpha;ctx.fillStyle=g;ctx.fill();
+    });
+    ctx.globalAlpha=1;ctx.globalCompositeOperation="source-over";
+  }
+  function loop(t){if(!running)return;draw(t);raf=requestAnimationFrame(loop)}
+  size();
+  const ro=new ResizeObserver(()=>{size();if(reduce)draw(4000)});ro.observe(cv);
+  const vis=()=>{if(reduce)return;if(document.hidden){running=false;cancelAnimationFrame(raf)}else if(!running){running=true;raf=requestAnimationFrame(loop)}};
+  document.addEventListener("visibilitychange",vis);
+  if(reduce)draw(4000);else raf=requestAnimationFrame(loop);
+  return()=>{running=false;cancelAnimationFrame(raf);ro.disconnect();document.removeEventListener("visibilitychange",vis)};
+}
+
+/* ---------- Nav ---------- */
+function renderNav(){
+  let h=`<div class="dhead"><b>Lessons</b><button class="closebtn" id="closeNav" aria-label="Close lessons">×</button></div>
+  <button class="homebtn" data-home aria-current="${view.kind==="home"}">Course overview</button>`;
+  M.forEach(m=>{
+    h+=`<div class="trk"><h3><i style="background:${m.color}"></i>${m.name}</h3><ul>`;
+    m.lessons.forEach(l=>{h+=`<li><button class="lbtn" data-l="${l.id}" aria-current="${view.kind==="lesson"&&view.id===l.id}">${dot(l)}${l.title}</button></li>`});
+    h+=`</ul></div>`;
+  });
+  document.getElementById("nav").innerHTML=h;
+  const done=ALL.filter(lessonDone).length;
+  document.getElementById("ringTxt").textContent=`${done}/${ALL.length}`;
+  document.getElementById("ringPr").setAttribute("stroke-dashoffset",(75.4*(1-done/ALL.length)).toFixed(1));
+}
+function openNav(o){document.body.classList.toggle("nav-open",o);document.getElementById("menuBtn").setAttribute("aria-expanded",o)}
+
+/* ---------- Home ---------- */
+function renderHome(){
+  const done=ALL.filter(lessonDone).length;
+  const next=ALL.find(l=>!lessonDone(l));
+  const cards=M.map(m=>{
+    const n=m.lessons.length,d=m.lessons.filter(lessonDone).length,mins=m.lessons.reduce((a,l)=>a+l.mins,0);
+    return `<article class="card" style="--tc:${m.color}">
+      <div class="top"><h3>${m.name}</h3><span class="wk">${m.week} · ~${mins} min</span></div>
+      <ul>${m.lessons.map(l=>`<li><button class="lbtn" data-l="${l.id}">${dot(l)}${l.title}</button></li>`).join("")}</ul>
+      <div class="mprog"><div class="bar"><b style="width:${d/n*100}%"></b></div>${d}/${n}</div>
+    </article>`}).join("");
+  document.getElementById("main").innerHTML=`
+  <section class="hero">
+    <canvas id="ink" aria-hidden="true"></canvas>
+    <span class="pill"><i></i>6-week course · Financial reports</span>
+    <h1>Build annual reports <em>like a pro.</em></h1>
+    <p class="lead">Short reads, quick quizzes and real hands-on tasks in Workiva, InDesign, Illustrator, Word and Photoshop. Every task builds the same sample report, <em>Harbourline Holdings Annual Report 2026</em>, so you finish with a portfolio piece.</p>
+    <div class="cta">${next?`<button class="btn" data-l="${next.id}">${lessonStarted(next)||done?"Continue":"Start lesson 1"} →</button>`:`<button class="btn" data-l="${ALL[0].id}">Review from the start</button>`}<button class="btn ghost" data-scroll="plan">See the plan</button></div>
+    <div class="stats"><div><b>${ALL.length}</b>lessons</div><div><b>6</b>apps</div><div><b>~${Math.round(TOTAL_MIN/60*2)/2}h</b>reading</div><div><b>${done}/${ALL.length}</b>complete</div></div>
+  </section>
+  <section class="section">
+    <p class="kicker">How each lesson works</p>
+    <h2>Read it, prove it, then do it</h2>
+    <div class="how">
+      <div><span class="n">01</span><b>Read</b><span>About 5 minutes of essentials. No history lessons, no fluff.</span></div>
+      <div><span class="n">02</span><b>Quiz</b><span>Three questions. Get 2 of 3 right to unlock the task.</span></div>
+      <div><span class="n">03</span><b>Hands-on</b><span>Do it in the real app, then tick the self-check list.</span></div>
+    </div>
+  </section>
+  <section class="section" id="plan">
+    <p class="kicker">The plan</p>
+    <h2>Six tracks, one finished report</h2>
+    <div class="cards">${cards}</div>
+    <div class="reset">Progress is saved on this device only.<button id="reset">Reset all progress</button><span id="resetConfirm" hidden>Are you sure? <button id="resetYes">Yes, reset</button></span></div>
+  </section>`;
+  inkStop=startInk(document.getElementById("ink"));
+}
+
+/* ---------- Lesson ---------- */
+function renderLesson(){
+  const l=ALL.find(x=>x.id===view.id),s=st(l.id),m=l.mod;
+  const qPass=qPassed(l),hDone=l.hands.checks.every((_,i)=>s.checks[i]);
+  const idx=ALL.indexOf(l),prev=ALL[idx-1],next=ALL[idx+1];
+  const ok='<span class="ok" aria-label="done">✓</span>';
+  let body="";
+  if(stage==="read"){
+    body=`<div class="read">${l.read}</div><div class="actions"><button class="btn" id="doneRead">${s.read?"Go to quiz →":"I've read this · Quiz →"}</button></div>`;
+  }else if(stage==="quiz"){
+    const qs=quizState[l.id]||(quizState[l.id]={});
+    body=l.quiz.map((q,i)=>{
+      const pick=qs[i];
+      const opts=q.o.map((o,j)=>{let c="opt";if(pick!==undefined){if(j===q.a)c+=" right";else if(j===pick)c+=" wrong"}
+        return `<button class="${c}" data-q="${i}" data-o="${j}" ${pick!==undefined?"disabled":""}><span class="k">${"ABCD"[j]}</span><span>${o}</span></button>`}).join("");
+      return `<div class="q"><p class="stem">${i+1}. ${q.q}</p><div class="opts">${opts}</div>${pick!==undefined?`<div class="why"><b>${pick===q.a?"Correct.":"Not quite."}</b> ${q.w}</div>`:""}</div>`;
+    }).join("");
+    if(Object.keys(qs).length===l.quiz.length){
+      const sc=l.quiz.filter((q,i)=>qs[i]===q.a).length,pass=sc>=l.quiz.length-1;
+      body+=`<div class="score ${pass?"pass":"fail"}">${sc} / ${l.quiz.length} · ${pass?"Passed. On to the hands-on task.":"Review the reading and try again."}</div>
+      <div class="actions">${pass?`<button class="btn" data-stage="hands">Hands-on →</button>`:`<button class="btn" data-stage="read">Re-read</button>`}<button class="btn ghost" id="retry">Retake quiz</button></div>`;
+    }else if(s.quiz!==null){body+=`<p class="hint">Best score so far: ${s.quiz} / ${l.quiz.length}</p>`}
+  }else{
+    const h=l.hands;
+    body=`<div class="read"><p>${h.intro}</p></div><h4>Steps</h4><ol class="steps">${h.steps.map(x=>`<li>${x}</li>`).join("")}</ol>`;
+    if(h.data)body+=`<div class="data"><div class="hd"><span>${h.dataLabel}</span><button id="copy">Copy</button></div><pre id="dataPre">${esc(h.data)}</pre></div>`;
+    body+=`<h4>Check your work</h4><div class="checks">${h.checks.map((c,i)=>`<label class="${s.checks[i]?"on":""}"><input type="checkbox" id="chk-${l.id}-${i}" data-c="${i}" ${s.checks[i]?"checked":""}><span>${c}</span></label>`).join("")}</div>`;
+    if(lessonDone(l))body+=`<div class="score pass" style="margin-top:14px">Lesson complete.</div>`;
+    else if(hDone&&!qPass)body+=`<p class="hint">Pass the quiz to complete this lesson.</p>`;
+  }
+  document.getElementById("main").innerHTML=`
+    <div class="crumbs"><span class="chip"><i style="background:${m.color}"></i>${m.name}</span><span>Lesson ${m.lessons.findIndex(x=>x.id===l.id)+1} of ${m.lessons.length}</span><span>~${l.mins} min</span></div>
+    <h1 class="ltitle">${l.title}</h1>
+    <div class="stagebar"><div class="seg" role="tablist" aria-label="Lesson stages">
+      <button role="tab" data-stage="read" aria-selected="${stage==="read"}">Read${s.read?ok:""}</button>
+      <button role="tab" data-stage="quiz" aria-selected="${stage==="quiz"}">Quiz${qPass?ok:""}</button>
+      <button role="tab" data-stage="hands" aria-selected="${stage==="hands"}">Hands-on${hDone?ok:""}</button>
+    </div></div>
+    <div class="panel" role="tabpanel">${body}</div>
+    <div class="footnav">${prev?`<button class="fbtn" data-l="${prev.id}"><small>← Previous</small><span>${prev.title}</span></button>`:""}${next?`<button class="fbtn next" data-l="${next.id}"><small>Next →</small><span>${next.title}</span></button>`:""}</div>`;
+}
+
+function render(){if(inkStop){inkStop();inkStop=null}renderNav();view.kind==="home"?renderHome():renderLesson()}
+function toTop(){window.scrollTo({top:0,behavior:"instant"in window?"instant":"auto"})}
+function go(id){view={kind:"lesson",id};stage="read";const l=ALL.find(x=>x.id===id),s=P[id];if(s&&s.read)stage=qPassed(l)?"hands":"quiz";openNav(false);render();toTop()}
+function setStage(sg){stage=sg;render();const bar=document.querySelector(".stagebar");if(bar&&bar.getBoundingClientRect().top<0)bar.scrollIntoView()}
+
+document.addEventListener("click",e=>{
+  const t=e.target.closest("button");
+  if(!t){if(e.target.id==="scrim")openNav(false);return}
+  if(t.id==="menuBtn"){openNav(!document.body.classList.contains("nav-open"));return}
+  if(t.id==="closeNav"){openNav(false);return}
+  if(t.hasAttribute("data-home")){view={kind:"home"};openNav(false);render();toTop();return}
+  if(t.dataset.scroll){document.getElementById(t.dataset.scroll)?.scrollIntoView({behavior:"smooth"});return}
+  if(t.dataset.l){go(t.dataset.l);return}
+  if(t.dataset.stage){setStage(t.dataset.stage);return}
+  if(t.id==="doneRead"){st(view.id).read=true;save();setStage("quiz");return}
+  if(t.dataset.q!==undefined&&t.dataset.o!==undefined){
+    const l=ALL.find(x=>x.id===view.id),qs=quizState[l.id]||(quizState[l.id]={});
+    qs[+t.dataset.q]=+t.dataset.o;
+    if(Object.keys(qs).length===l.quiz.length){const sc=l.quiz.filter((q,i)=>qs[i]===q.a).length;const s=st(l.id);s.quiz=Math.max(s.quiz??0,sc);save()}
+    const y=window.scrollY;render();window.scrollTo(0,y);return}
+  if(t.id==="retry"){quizState[view.id]={};setStage("quiz");return}
+  if(t.id==="copy"){const txt=ALL.find(x=>x.id===view.id).hands.data;
+    const sel=()=>{const r=document.createRange();r.selectNodeContents(document.getElementById("dataPre"));const s=getSelection();s.removeAllRanges();s.addRange(r);t.textContent="Selected · press Copy"};
+    try{navigator.clipboard.writeText(txt).then(()=>{t.textContent="Copied ✓"},sel)}catch(err){sel()}return}
+  if(t.id==="reset"){document.getElementById("resetConfirm").hidden=false;return}
+  if(t.id==="resetYes"){P={};quizState={};save();render();return}
+});
+document.getElementById("scrim").addEventListener("click",()=>openNav(false));
+document.addEventListener("keydown",e=>{if(e.key==="Escape")openNav(false)});
+document.addEventListener("change",e=>{
+  const c=e.target;if(c.dataset&&c.dataset.c!==undefined){const s=st(view.id);s.checks[+c.dataset.c]=c.checked;save();const y=window.scrollY;render();window.scrollTo(0,y)}
+});
+render();
+</script>
+</body>
+</html>
